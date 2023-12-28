@@ -42,6 +42,7 @@
   </properties>
 
   <modules>
+    <module>cloud-common</module>
   </modules>
 
   <dependencyManagement>
