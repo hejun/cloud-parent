@@ -1,0 +1,5 @@
+cloud:
+  auth:
+    jwk:
+      alias: ${JKS_ALIAS}
+      password: ${JKS_PASSWORD}
