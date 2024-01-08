@@ -44,6 +44,7 @@
   <modules>
     <module>cloud-common</module>
     <module>cloud-auth</module>
+    <module>cloud-gateway</module>
   </modules>
 
   <dependencyManagement>
