@@ -1,0 +1,10 @@
+cloud:
+  auth:
+    jwk:
+      alias: ${JKS_ALIAS}
+      password: ${JKS_PASSWORD}
+    cors:
+      allowed-origins: '*'
+      allowed-methods: '*'
+      allowed-headers:
+        - Authorization
