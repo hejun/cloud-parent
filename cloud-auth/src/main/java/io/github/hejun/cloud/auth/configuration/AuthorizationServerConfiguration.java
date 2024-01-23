@@ -6,6 +6,8 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import io.github.hejun.cloud.auth.properties.CorsProperties;
 import io.github.hejun.cloud.auth.properties.JwkProperties;
+import io.github.hejun.cloud.auth.security.handler.ErrorResponseWrapperHandler;
+import io.github.hejun.cloud.auth.security.handler.SuccessResponseWrapperHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,17 +55,26 @@ public class AuthorizationServerConfiguration {
 
 		http
 			.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-			.oidc(Customizer.withDefaults());
+			.tokenEndpoint(tokenEndpoint -> tokenEndpoint
+				.accessTokenResponseHandler(new SuccessResponseWrapperHandler())
+				.errorResponseHandler(new ErrorResponseWrapperHandler()))
+			.oidc(oidc -> oidc
+				.userInfoEndpoint(userinfo -> userinfo
+					.userInfoResponseHandler(new SuccessResponseWrapperHandler())));
 
 		http
 			.exceptionHandling(handling -> handling
+				.defaultAuthenticationEntryPointFor(
+					new ErrorResponseWrapperHandler(),
+					new MediaTypeRequestMatcher(MediaType.APPLICATION_JSON))
 				.defaultAuthenticationEntryPointFor(
 					new LoginUrlAuthenticationEntryPoint("/login"),
 					new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
 			)
 			.cors(cors -> cors.configurationSource(corsProperties.build()))
 			.oauth2ResourceServer(resourceServer -> resourceServer
-				.jwt(Customizer.withDefaults()));
+				.jwt(Customizer.withDefaults())
+				.authenticationEntryPoint(new ErrorResponseWrapperHandler()));
 		return http.build();
 	}
 
