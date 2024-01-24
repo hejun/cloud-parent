@@ -65,9 +65,6 @@ public class AuthorizationServerConfiguration {
 		http
 			.exceptionHandling(handling -> handling
 				.defaultAuthenticationEntryPointFor(
-					new ErrorResponseWrapperHandler(),
-					new MediaTypeRequestMatcher(MediaType.APPLICATION_JSON))
-				.defaultAuthenticationEntryPointFor(
 					new LoginUrlAuthenticationEntryPoint("/login"),
 					new MediaTypeRequestMatcher(MediaType.TEXT_HTML))
 			)
