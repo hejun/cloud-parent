@@ -3,7 +3,6 @@ package io.github.hejun.cloud.auth.configuration;
 import io.github.hejun.cloud.auth.properties.CorsProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -31,7 +30,7 @@ public class WebSecurityConfiguration {
 		http
 			.authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
 			.cors(cors -> cors.configurationSource(corsProperties.build()))
-			.formLogin(Customizer.withDefaults());
+			.formLogin(login -> login.loginPage("/login").permitAll());
 		return http.build();
 	}
 

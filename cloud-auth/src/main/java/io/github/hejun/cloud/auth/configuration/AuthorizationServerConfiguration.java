@@ -55,6 +55,7 @@ public class AuthorizationServerConfiguration {
 
 		http
 			.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+			.authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint.consentPage("/oauth2/consent"))
 			.tokenEndpoint(tokenEndpoint -> tokenEndpoint
 				.accessTokenResponseHandler(new SuccessResponseWrapperHandler())
 				.errorResponseHandler(new ErrorResponseWrapperHandler()))
