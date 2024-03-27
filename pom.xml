@@ -42,6 +42,7 @@
 	</properties>
 
 	<modules>
+		<module>cloud-auth</module>
 	</modules>
 
 	<dependencyManagement>
