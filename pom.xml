@@ -43,6 +43,7 @@
 
 	<modules>
 		<module>cloud-auth</module>
+		<module>cloud-gateway</module>
 	</modules>
 
 	<dependencyManagement>

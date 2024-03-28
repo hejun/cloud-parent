@@ -1,0 +1,27 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          cloud:
+            issuer-uri: http://localhost:9090
+        registration:
+          cloud:
+            provider: cloud
+            client-id: cloud
+            client-secret: Hj1234
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowed-origins: '*'
+            allowed-methods: '*'
+            allowed-headers: '*'
+            max-age: 1800
