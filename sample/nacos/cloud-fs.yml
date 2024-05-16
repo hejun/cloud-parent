@@ -1,0 +1,7 @@
+cloud:
+  fs:
+    minio:
+      endpoint: http://192.168.2.2:9000
+      access-key: root
+      secret-key: Hj123456
+      bucket: cloud-fs

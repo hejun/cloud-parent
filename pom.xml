@@ -45,7 +45,8 @@
 	<modules>
 		<module>cloud-common</module>
 		<module>cloud-gateway</module>
-	</modules>
+        <module>cloud-fs</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -65,7 +66,7 @@
 			</dependency>
 			<dependency>
 				<groupId>io.github.hejun.cloud</groupId>
-				<artifactId>cloud-parent</artifactId>
+				<artifactId>cloud-common</artifactId>
 				<version>${cloud-parent-common.version}</version>
 			</dependency>
 		</dependencies>

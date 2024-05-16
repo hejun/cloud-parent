@@ -9,3 +9,10 @@ spring:
             allowed-methods: '*'
             allowed-headers: '*'
             max-age: 1800
+      routes:
+        - id: fs
+          uri: lb://cloud-fs
+          predicates:
+            - Path=/fs/**
+          filters:
+            - StripPrefix=1
