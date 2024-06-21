@@ -1,6 +1,5 @@
 package io.github.hejun.cloud.fs.controller;
 
-import io.github.hejun.cloud.common.exception.StatefulException;
 import io.github.hejun.cloud.common.vo.Result;
 import io.github.hejun.cloud.fs.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +33,7 @@ public class FileController {
 				}
 			})
 			.map(Result::SUCCESS)
-			.onErrorMap(throwable -> throwable instanceof StatefulException se ?
-				se : new StatefulException(500, throwable.getMessage()));
+			.onErrorResume(err -> Mono.just(Result.ERROR(500, err.getMessage())));
 	}
 
 }
