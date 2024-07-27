@@ -1,40 +1,43 @@
 package io.github.hejun.cloud.fs.service;
 
-import io.github.hejun.cloud.fs.properties.MinioProperties;
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import io.minio.GetObjectResponse;
+import io.minio.StatObjectResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文件服务
  *
  * @author HeJun
  */
-@Slf4j
-@Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class FileService {
+public interface FileService {
 
-	private final MinioProperties minioProperties;
-	private final MinioClient client;
+	/**
+	 * 上传文件
+	 *
+	 * @param file 文件
+	 * @return 存储路径
+	 * @throws Exception 上传异常
+	 */
+	String upload(MultipartFile file) throws Exception;
 
-	@PostConstruct
-	@SneakyThrows(Exception.class)
-	void init() {
-		BucketExistsArgs bucketExistsArgs = BucketExistsArgs.builder()
-			.bucket(minioProperties.getBucket()).build();
-		if (!client.bucketExists(bucketExistsArgs)) {
-			MakeBucketArgs makeBucketArgs = MakeBucketArgs.builder()
-				.bucket(minioProperties.getBucket())
-				.build();
-			client.makeBucket(makeBucketArgs);
-		}
-	}
+	/**
+	 * 获取文件信息
+	 *
+	 * @param path 文件存储路径
+	 * @return 文件信息
+	 * @throws Exception 查询异常
+	 */
+	StatObjectResponse objectInfo(String path) throws Exception;
+
+	/**
+	 * 文件下载
+	 *
+	 * @param path   文件存储路径
+	 * @param offset 下载起始
+	 * @param length 下载大小
+	 * @return 下载文件信息
+	 * @throws Exception 下载异常
+	 */
+	GetObjectResponse download(String path, Long offset, Long length) throws Exception;
 
 }
