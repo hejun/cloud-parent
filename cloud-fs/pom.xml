@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>cloud-fs-server</module>
+		<module>cloud-fs-api</module>
 	</modules>
 
 	<dependencies>
