@@ -45,8 +45,9 @@
 	<modules>
 		<module>cloud-common</module>
 		<module>cloud-gateway</module>
-        <module>cloud-fs</module>
-    </modules>
+		<module>cloud-fs</module>
+		<module>cloud-msg</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>
