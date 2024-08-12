@@ -16,3 +16,9 @@ spring:
             - Path=/fs/**
           filters:
             - StripPrefix=1
+        - id: msg
+          uri: lb://cloud-msg
+          predicates:
+            - Path=/msg/**
+          filters:
+            - StripPrefix=1
