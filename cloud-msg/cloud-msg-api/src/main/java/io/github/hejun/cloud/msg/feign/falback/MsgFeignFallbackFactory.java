@@ -23,7 +23,7 @@ public class MsgFeignFallbackFactory implements FallbackFactory<MsgFeign> {
 
 			@Override
 			public Result<String> send(Msg msg) {
-				log.error("FileFeign upload Error: {}", cause.getMessage());
+				log.error("MsgFeign send Error: {}", cause.getMessage());
 				if (cause instanceof FeignException e) {
 					return Result.ERROR(e.status(), e.contentUTF8());
 				}

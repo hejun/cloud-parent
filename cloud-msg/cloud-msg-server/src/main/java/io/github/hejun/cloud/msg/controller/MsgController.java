@@ -4,6 +4,7 @@ import io.github.hejun.cloud.common.vo.Result;
 import io.github.hejun.cloud.msg.common.dto.Msg;
 import io.github.hejun.cloud.msg.common.enums.MsgType;
 import io.github.hejun.cloud.msg.service.MsgService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class MsgController {
 	private Map<MsgType, MsgService> msgHandStrategy;
 
 	@PostMapping
-	public Result<String> send(@RequestBody Msg msg) throws Exception {
+	public Result<String> send(@Valid @RequestBody Msg msg) throws Exception {
 		MsgService msgService = msgHandStrategy.get(msg.getMsgType());
 		String resp = msgService.send(msg);
 		return Result.SUCCESS(resp);
