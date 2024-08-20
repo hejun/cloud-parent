@@ -31,7 +31,7 @@ public class Msg {
 	@NotBlank(message = "发送人不可为空")
 	private String sender;
 	/**
-	 * 接收人
+	 * 接收人, * 为全员发布
 	 */
 	@NotBlank(message = "接收人不可为空")
 	private String receiver;
