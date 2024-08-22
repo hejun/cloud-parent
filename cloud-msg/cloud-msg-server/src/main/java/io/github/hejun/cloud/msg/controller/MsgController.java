@@ -28,7 +28,7 @@ public class MsgController {
 
 	@PostMapping
 	public Result<String> send(@Valid @RequestBody Msg msg) throws Exception {
-		MsgService msgService = msgHandStrategy.get(msg.getMsgType());
+		MsgService msgService = msgHandStrategy.get(msg.getType());
 		String resp = msgService.send(msg);
 		return Result.SUCCESS(resp);
 	}

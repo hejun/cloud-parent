@@ -19,7 +19,7 @@ public class Msg {
 	 * 消息类型
 	 */
 	@NotNull(message = "消息类型不可为空")
-	private MsgType msgType;
+	private MsgType type;
 	/**
 	 * 消息内容
 	 */
