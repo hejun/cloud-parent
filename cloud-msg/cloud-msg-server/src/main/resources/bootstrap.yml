@@ -12,9 +12,6 @@ spring:
           - data-id: redis.yml
             group: ${spring.profiles.active}
             refresh: true
-logging:
-  level:
-    io.github.hejun.cloud.msg: trace
 ---
 spring:
   config:
