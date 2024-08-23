@@ -5,6 +5,16 @@ spring:
     name: cloud-msg
   profiles:
     active: dev
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+          - data-id: redis.yml
+            group: ${spring.profiles.active}
+            refresh: true
+logging:
+  level:
+    io.github.hejun.cloud.msg: trace
 ---
 spring:
   config:

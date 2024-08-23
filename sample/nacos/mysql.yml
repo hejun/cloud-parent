@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT:3306}/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+    hikari:
+      connection-test-query: "SELECT 1"
+      connection-timeout: 600000
+      maximum-pool-size: 10
+      minimum-idle: 2
+      max-lifetime: 1800000
+      validation-timeout: 3000
+      idle-timeout: 60000
+mybatis-plus:
+  configuration:
+    default-executor-type: reuse
