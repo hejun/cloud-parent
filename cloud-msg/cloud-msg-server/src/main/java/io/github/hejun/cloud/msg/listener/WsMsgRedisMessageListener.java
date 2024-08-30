@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -26,10 +27,11 @@ public class WsMsgRedisMessageListener implements MessageListener {
 
 	private final ObjectMapper objectMapper;
 	private final SimpMessagingTemplate simpMessagingTemplate;
+	private final SimpUserRegistry userRegistry;
 
 	@Override
 	public void onMessage(Message message, byte[] pattern) {
-		log.debug("接收到消息：{}", message);
+		log.debug("Topic: [ {} ] 接收到消息：{}", new String(pattern), message);
 		Msg msg;
 		try {
 			msg = objectMapper.readValue(message.getBody(), Msg.class);
@@ -38,9 +40,11 @@ public class WsMsgRedisMessageListener implements MessageListener {
 		}
 		if ("*".equals(msg.getReceiver())) {
 			simpMessagingTemplate.convertAndSend(WsConfig.KEY_DESTINATION_ALL, msg.getContent());
-		} else {
+		} else if (userRegistry.getUser(msg.getReceiver()) != null) {
 			// 这里固定死 destination 为 notice， 前端订阅destination为：/user/{receiver}/notice
 			simpMessagingTemplate.convertAndSendToUser(msg.getReceiver(), "/notice", msg.getContent());
+		} else {
+			log.info("未匹配到User: {},忽略推送", msg.getReceiver());
 		}
 	}
 
