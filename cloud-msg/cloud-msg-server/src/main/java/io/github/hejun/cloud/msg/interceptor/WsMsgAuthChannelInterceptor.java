@@ -47,6 +47,7 @@ public class WsMsgAuthChannelInterceptor implements ChannelInterceptor {
 						.writeValueAsString(Result.ERROR(400, "Authorization is missing"));
 					throw new MessagingException(errorMsg);
 				} catch (JsonProcessingException e) {
+					log.error("Write Json Error", e);
 					throw new MessagingException(e.getMessage());
 				}
 			}
