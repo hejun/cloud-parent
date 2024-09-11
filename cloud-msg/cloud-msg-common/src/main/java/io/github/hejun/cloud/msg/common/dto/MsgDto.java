@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Msg {
+public class MsgDto {
 
 	/**
 	 * 消息类型

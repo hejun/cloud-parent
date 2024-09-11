@@ -2,7 +2,7 @@ package io.github.hejun.cloud.msg.feign.falback;
 
 import feign.FeignException;
 import io.github.hejun.cloud.common.vo.Result;
-import io.github.hejun.cloud.msg.common.dto.Msg;
+import io.github.hejun.cloud.msg.common.dto.MsgDto;
 import io.github.hejun.cloud.msg.feign.MsgFeign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -22,7 +22,7 @@ public class MsgFeignFallbackFactory implements FallbackFactory<MsgFeign> {
 		return new MsgFeign() {
 
 			@Override
-			public Result<String> send(Msg msg) {
+			public Result<String> send(MsgDto msg) {
 				log.error("MsgFeign send Error: {}", cause.getMessage());
 				if (cause instanceof FeignException e) {
 					return Result.ERROR(e.status(), e.contentUTF8());

@@ -1,6 +1,6 @@
 package io.github.hejun.cloud.msg.service;
 
-import io.github.hejun.cloud.msg.common.dto.Msg;
+import io.github.hejun.cloud.msg.common.dto.MsgDto;
 import io.github.hejun.cloud.msg.common.enums.MsgType;
 
 /**
@@ -17,7 +17,7 @@ public interface MsgService {
 	 * @return 发送结果
 	 * @throws Exception 发送消息异常
 	 */
-	String send(Msg msg) throws Exception;
+	String send(MsgDto msg) throws Exception;
 
 	/**
 	 * 返回实现类支持的类型

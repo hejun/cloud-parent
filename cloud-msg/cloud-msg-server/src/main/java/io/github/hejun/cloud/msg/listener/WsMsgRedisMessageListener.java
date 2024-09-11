@@ -2,7 +2,7 @@ package io.github.hejun.cloud.msg.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.hejun.cloud.common.exception.StatefulRuntimeException;
-import io.github.hejun.cloud.msg.common.dto.Msg;
+import io.github.hejun.cloud.msg.common.dto.MsgDto;
 import io.github.hejun.cloud.msg.config.WsConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +32,9 @@ public class WsMsgRedisMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message message, byte[] pattern) {
 		log.debug("Topic: [ {} ] 接收到消息：{}", new String(pattern), message);
-		Msg msg;
+		MsgDto msg;
 		try {
-			msg = objectMapper.readValue(message.getBody(), Msg.class);
+			msg = objectMapper.readValue(message.getBody(), MsgDto.class);
 		} catch (IOException e) {
 			throw new StatefulRuntimeException(500, e);
 		}

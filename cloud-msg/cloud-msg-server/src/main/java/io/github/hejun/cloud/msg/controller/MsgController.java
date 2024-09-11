@@ -1,7 +1,7 @@
 package io.github.hejun.cloud.msg.controller;
 
 import io.github.hejun.cloud.common.vo.Result;
-import io.github.hejun.cloud.msg.common.dto.Msg;
+import io.github.hejun.cloud.msg.common.dto.MsgDto;
 import io.github.hejun.cloud.msg.common.enums.MsgType;
 import io.github.hejun.cloud.msg.service.MsgService;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ public class MsgController {
 	private Map<MsgType, MsgService> msgHandStrategy;
 
 	@PostMapping
-	public Result<String> send(@Valid @RequestBody Msg msg) throws Exception {
+	public Result<String> send(@Valid @RequestBody MsgDto msg) throws Exception {
 		MsgService msgService = msgHandStrategy.get(msg.getType());
 		String resp = msgService.send(msg);
 		return Result.SUCCESS(resp);
