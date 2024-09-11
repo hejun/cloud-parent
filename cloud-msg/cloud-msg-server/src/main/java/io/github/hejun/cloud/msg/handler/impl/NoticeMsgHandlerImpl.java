@@ -1,8 +1,9 @@
-package io.github.hejun.cloud.msg.service.impl;
+package io.github.hejun.cloud.msg.handler.impl;
 
 import io.github.hejun.cloud.msg.common.dto.MsgDto;
 import io.github.hejun.cloud.msg.common.enums.MsgType;
-import io.github.hejun.cloud.msg.service.MsgService;
+import io.github.hejun.cloud.msg.handler.MsgHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,11 +11,13 @@ import org.springframework.stereotype.Service;
  *
  * @author HeJun
  */
+@Slf4j
 @Service
-public class NoticeMsgServiceImpl implements MsgService {
+public class NoticeMsgHandlerImpl implements MsgHandler {
 
 	@Override
 	public String send(MsgDto msg) throws Exception {
+		log.debug("NoticeHandler接收到消息：{}", msg);
 		return "";
 	}
 

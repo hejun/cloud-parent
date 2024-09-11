@@ -2,7 +2,6 @@ package io.github.hejun.cloud.msg.controller;
 
 import io.github.hejun.cloud.common.vo.Result;
 import io.github.hejun.cloud.msg.common.dto.MsgDto;
-import io.github.hejun.cloud.msg.common.enums.MsgType;
 import io.github.hejun.cloud.msg.service.MsgService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 消息Controller
@@ -24,23 +19,12 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MsgController {
 
-	private Map<MsgType, MsgService> msgHandStrategy;
+	private final MsgService msgService;
 
 	@PostMapping
 	public Result<String> send(@Valid @RequestBody MsgDto msg) throws Exception {
-		MsgService msgService = msgHandStrategy.get(msg.getType());
-		String resp = msgService.send(msg);
-		return Result.SUCCESS(resp);
-	}
-
-	@Autowired
-	public void setMsgHandStrategy(List<MsgService> msgServiceList) {
-		if (msgHandStrategy == null) {
-			msgHandStrategy = new HashMap<>();
-		}
-		for (MsgService msgService : msgServiceList) {
-			this.msgHandStrategy.put(msgService.supportType(), msgService);
-		}
+		String result = msgService.send(msg);
+		return Result.SUCCESS(result);
 	}
 
 }
