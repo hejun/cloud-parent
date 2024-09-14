@@ -38,6 +38,7 @@ public class MsgServiceImpl implements MsgService {
 			throw new StatefulRuntimeException(500, "无法处理的消息类型: [ " + msg.getType() + " ]");
 		}
 		Msg entity = msgStructMapper.convert(msg);
+		entity.setStatus(SendStatus.WAIT);
 		msgMapper.insert(entity);
 		try {
 			String result = handler.send(msg);

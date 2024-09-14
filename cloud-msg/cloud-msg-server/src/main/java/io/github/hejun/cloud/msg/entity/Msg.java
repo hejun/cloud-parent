@@ -1,6 +1,8 @@
 package io.github.hejun.cloud.msg.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.hejun.cloud.msg.common.enums.MsgType;
 import io.github.hejun.cloud.msg.common.enums.SendStatus;
 import lombok.Getter;
@@ -26,7 +28,6 @@ public class Msg {
 	/**
 	 * 消息类型
 	 */
-	@TableField("msg_type")
 	private MsgType type;
 
 	/**
@@ -58,7 +59,6 @@ public class Msg {
 	 * 保存时间
 	 */
 	@CreatedDate
-	@TableField(fill = FieldFill.INSERT)
 	private Date saveTime;
 
 	/**
