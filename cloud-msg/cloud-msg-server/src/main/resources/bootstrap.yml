@@ -12,6 +12,9 @@ spring:
           - data-id: redis.yml
             group: ${spring.profiles.active}
             refresh: true
+          - data-id: mysql.yml
+            group: ${spring.profiles.active}
+            refresh: true
 ---
 spring:
   config:
