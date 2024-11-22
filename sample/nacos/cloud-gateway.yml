@@ -5,7 +5,15 @@ spring:
         add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowed-origins: '*'
+            allowed-origin-patterns: '*'
             allowed-methods: '*'
             allowed-headers: '*'
             max-age: 1800
+      routes:
+        - id: auth
+          uri: lb://cloud-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - DedupeResponseHeader=Access-Control-Allow-Origin,RETAIN_FIRST
