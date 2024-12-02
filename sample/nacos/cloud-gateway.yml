@@ -24,3 +24,9 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin,RETAIN_FIRST
+        - id: msg
+          uri: lb://cloud-msg
+          predicates:
+            - Path=/msg/**
+          filters:
+            - StripPrefix=1
