@@ -49,7 +49,7 @@ public class OAuth2SecurityConfig {
 					)
 			)
 			.oauth2ResourceServer(resourceServer ->
-				resourceServer.jwt(Customizer.withDefaults())
+				resourceServer.opaqueToken(Customizer.withDefaults())
 			);
 		return http.build();
 	}

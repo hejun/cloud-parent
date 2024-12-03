@@ -31,6 +31,9 @@ public class WebSecurityConfig {
 			.csrf(CsrfConfigurer::disable)
 			.formLogin(formLogin ->
 				formLogin.loginPage("/login").permitAll()
+			)
+			.oauth2ResourceServer(resourceServer ->
+				resourceServer.opaqueToken(Customizer.withDefaults())
 			);
 		return http.build();
 	}
