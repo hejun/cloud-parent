@@ -1,1 +1,2 @@
 io.github.hejun.cloud.common.extension.mybatisplus.MybatisPlusConfig
+io.github.hejun.cloud.common.extension.security.FeignCommonConfig
