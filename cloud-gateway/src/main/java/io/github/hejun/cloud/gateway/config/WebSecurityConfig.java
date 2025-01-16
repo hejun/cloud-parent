@@ -29,6 +29,8 @@ public class WebSecurityConfig {
 			.authorizeExchange(authorizeExchange ->
 				authorizeExchange
 					.pathMatchers("/auth/oauth2/**").permitAll()
+					// 需要对 WebSocket 放行,由 Msg 服务握手后自行验证
+					.pathMatchers("/msg/ws/**").permitAll()
 					.anyExchange().authenticated()
 			)
 			.cors(cors -> cors.configurationSource(this.buildConfigSource(globalCorsProperties)))

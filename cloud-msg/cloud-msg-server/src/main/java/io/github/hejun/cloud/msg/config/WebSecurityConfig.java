@@ -1,5 +1,6 @@
 package io.github.hejun.cloud.msg.config;
 
+import io.github.hejun.cloud.msg.enums.WebSocketConstants;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,9 @@ public class WebSecurityConfig {
 	public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(authorizeHttpRequests ->
-				authorizeHttpRequests.anyRequest().authenticated()
+				authorizeHttpRequests
+					.requestMatchers(String.format("%s/**", WebSocketConstants.WEBSOCKET_ENDPOINT)).permitAll()
+					.anyRequest().authenticated()
 			)
 			.oauth2ResourceServer(oauth2ResourceServer ->
 				oauth2ResourceServer.opaqueToken(Customizer.withDefaults())
