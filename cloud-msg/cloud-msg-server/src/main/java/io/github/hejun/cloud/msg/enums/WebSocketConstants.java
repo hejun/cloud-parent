@@ -11,4 +11,6 @@ public interface WebSocketConstants {
 	String DESTINATION_ALL = "/topic";
 	String DESTINATION_USER = "/user";
 
+	String WS_MSG_DISTRIBUTE_CHANNEL = "MSG:CHANNEL:WS";
+
 }

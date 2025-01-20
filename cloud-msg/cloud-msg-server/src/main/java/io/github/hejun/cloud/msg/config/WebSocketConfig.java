@@ -2,6 +2,7 @@ package io.github.hejun.cloud.msg.config;
 
 import io.github.hejun.cloud.msg.enums.WebSocketConstants;
 import io.github.hejun.cloud.msg.interceptors.WebSocketAuthenticationChannelInterceptor;
+import io.github.hejun.cloud.msg.listener.WebSocketMessageListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.messaging.simp.config.ChannelRegistration;
@@ -72,6 +76,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	public ChannelInterceptor csrfChannelInterceptor() {
 		return new ChannelInterceptor() {
 		};
+	}
+
+	@Bean
+	public RedisMessageListenerContainer wsRedisMessageListenerContainer(RedisConnectionFactory connectionFactory,
+																		 WebSocketMessageListener webSocketMessageListener) {
+		RedisMessageListenerContainer listenerContainer = new RedisMessageListenerContainer();
+		listenerContainer.setConnectionFactory(connectionFactory);
+		listenerContainer
+			.addMessageListener(webSocketMessageListener, new ChannelTopic(WebSocketConstants.WS_MSG_DISTRIBUTE_CHANNEL));
+		return listenerContainer;
 	}
 
 }
