@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.github.hejun.cloud</groupId>
+		<artifactId>cloud-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>cloud-fs</artifactId>
+	<packaging>pom</packaging>
+	<name>Cloud File Storage</name>
+
+	<properties>
+		<cloud-fs-common.version>0.0.1-SNAPSHOT</cloud-fs-common.version>
+	</properties>
+
+	<modules>
+		<module>cloud-fs-common</module>
+		<module>cloud-fs-api</module>
+		<module>cloud-fs-server</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.hejun.cloud</groupId>
+			<artifactId>cloud-common</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.hejun.cloud</groupId>
+				<artifactId>cloud-fs-common</artifactId>
+				<version>${cloud-fs-common.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

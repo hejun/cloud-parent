@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @author HeJun
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class UserService implements UserDetailsService {
 
 	private final PasswordEncoder passwordEncoder;

@@ -31,7 +31,7 @@ import java.util.Set;
  * @author HeJun
  */
 @Controller
-@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class PageController {
 
 	private final RegisteredClientRepository registeredClientRepository;

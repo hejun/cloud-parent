@@ -30,3 +30,9 @@ spring:
             - Path=/msg/**
           filters:
             - StripPrefix=1
+        - id: fs
+          uri: lb://cloud-fs
+          predicates:
+            - Path=/fs/**
+          filters:
+            - StripPrefix=1

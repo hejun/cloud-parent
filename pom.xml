@@ -51,6 +51,7 @@
 		<module>cloud-gateway</module>
 		<module>cloud-auth</module>
 		<module>cloud-msg</module>
+        <module>cloud-fs</module>
 	</modules>
 
 	<dependencyManagement>

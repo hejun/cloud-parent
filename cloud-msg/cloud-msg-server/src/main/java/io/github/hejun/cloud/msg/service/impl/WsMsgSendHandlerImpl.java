@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class WsMsgSendHandlerImpl implements MsgSendHandler {
 
 	private final RedisTemplate<String, MsgDto> redisTemplate;
