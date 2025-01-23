@@ -5,13 +5,14 @@ spring:
     name: cloud-msg
   profiles:
     active: dev
+  config:
+    import:
+      - nacos:${spring.application.name}.yml?group=${spring.profiles.active}
+      - nacos:redis.yml?group=${spring.profiles.active}
   cloud:
     nacos:
-      config:
-        shared-configs:
-          - data-id: redis.yml
-            group: ${spring.profiles.active}
-            refresh: true
+      discovery:
+        group: ${spring.profiles.active}
 ---
 spring:
   config:
@@ -19,13 +20,7 @@ spring:
       on-profile: dev
   cloud:
     nacos:
-      config:
-        server-addr: 192.168.2.2:8848
-        group: ${spring.profiles.active}
-        file-extension: yml
-      discovery:
-        group: ${spring.profiles.active}
-        server-addr: ${spring.cloud.nacos.config.server-addr}
+      server-addr: 192.168.2.2:8848
 ---
 spring:
   config:

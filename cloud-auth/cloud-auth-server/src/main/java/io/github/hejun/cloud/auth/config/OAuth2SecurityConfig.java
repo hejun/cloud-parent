@@ -47,9 +47,6 @@ public class OAuth2SecurityConfig {
 						new LoginUrlAuthenticationEntryPoint("/login"),
 						new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
 					)
-			)
-			.oauth2ResourceServer(resourceServer ->
-				resourceServer.opaqueToken(Customizer.withDefaults())
 			);
 		return http.build();
 	}
