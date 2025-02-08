@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -54,7 +55,11 @@ public class FileController {
 		try (InputStream is = fileService.download(path, firstBytePos, lastBytePos)) {
 			resp.setContentType(stat.headers().get(HttpHeaders.CONTENT_TYPE));
 			resp.setContentLengthLong(stat.size());
-			String contentDisposition = ContentDisposition.attachment().filename(stat.object()).build().toString();
+			String contentDisposition = ContentDisposition
+				.attachment()
+				.filename(stat.object(), StandardCharsets.UTF_8)
+				.build()
+				.toString();
 			resp.setHeader(HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 			if (firstBytePos != null) {
 				resp.setHeader(HttpHeaders.ACCEPT_RANGES, "bytes");
