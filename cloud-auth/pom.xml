@@ -20,6 +20,7 @@
 	<modules>
 		<module>cloud-auth-common</module>
 		<module>cloud-auth-api</module>
+		<module>cloud-auth-ui</module>
 		<module>cloud-auth-server</module>
 	</modules>
 

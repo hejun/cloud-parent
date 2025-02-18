@@ -37,6 +37,11 @@ public class PageController {
 	private final RegisteredClientRepository registeredClientRepository;
 	private final OAuth2AuthorizationConsentService authorizationConsentService;
 
+	@GetMapping
+	public String index(){
+		return "index";
+	}
+
 	@GetMapping("/login")
 	public String login(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
